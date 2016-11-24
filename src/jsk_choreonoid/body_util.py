@@ -18,12 +18,12 @@ def angleVector(self,angles=None):
             joint.q=angles[j]
     return np.array([joint.q for joint in self.jointList()])
 ## cnoid.BodyPlugin.BodyItem (robotItem)
-def drawBodyItem(self):
-    robot=self.body()
-    robot.calcForwardKinematics()
-    cnoid.Base.ItemTreeView.instance().checkItem(self,False)
-    cnoid.Base.ItemTreeView.instance().checkItem(self,True)
-    return True
+# def drawBodyItem(self):
+#     robot=self.body()
+#     robot.calcForwardKinematics()
+#     cnoid.Base.ItemTreeView.instance().checkItem(self,False)
+#     cnoid.Base.ItemTreeView.instance().checkItem(self,True)
+#     return True
 
 # add method
 ## cnoid.Body.Body (robot)
@@ -32,4 +32,4 @@ cnoid.Body.Body.jointList=jointList
 cnoid.Body.Body.angleVector=angleVector
 
 ## cnoid.BodyPlugin.BodyItem (robotItem)
-cnoid.BodyPlugin.BodyItem.draw=drawBodyItem
+# cnoid.BodyPlugin.BodyItem.draw=drawBodyItem

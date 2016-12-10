@@ -19,6 +19,12 @@ message("choreonoid_INCLUDE_DIRS: ${choreonoid_INCLUDE_DIRS}")
 message("choreonoid_LIBRARY_DIRS: ${choreonoid_LIBRARY_DIRS}")
 message("choreonoid_LIBRARIES: ${choreonoid_LIBRARIES}")
 
+execute_process( # [todo] we should use find_package function (maybe)
+  COMMAND pkg-config --variable=plugindir choreonoid
+  OUTPUT_VARIABLE choreonoid_PLUGINDIR
+  RESULT_VARIABLE RESULT
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+message("choreonoid_PLUGINDIR: ${choreonoid_PLUGINDIR}")
 
 if(UNIX)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")

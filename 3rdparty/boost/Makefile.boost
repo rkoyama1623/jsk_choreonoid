@@ -1,0 +1,39 @@
+# -*- mode: makefile -*-
+
+BOOST_DIR = ./build/boost
+GIT_URL = https://github.com/boostorg/boost.git
+GIT_REVISION = master
+MODULE = #math, python etc
+BOOST_MODULE_UPDATE = $(MODULE:%=%.update)
+BOOST_MODULE_OPTION = $(MODULE:%=--with-%)
+PREFIX = # /usr/local by default
+CORE_NUMBER = 8
+
+$(BOOST_DIR):
+	@echo [make boost] clone boost dir
+	git clone $(GIT_URL) $(BOOST_DIR)
+	cd $(BOOST_DIR) && git checkout $(GIT_REVISION) && git submodule update --init tools && git submodule update --init libs/config
+
+%.update: $(BOOST_DIR)
+	@echo [make boost] $@ $*
+	cd $(BOOST_DIR) && git submodule update --init libs/$*
+
+ifeq ($(MODULE),) #MODULE is empty
+BOOST_MODULES: ALL_BOOST_MODULES
+	@echo [make boost] $@ ALL
+else # MODULE is specified
+BOOST_MODULES: $(BOOST_MODULE_UPDATE)
+	@echo [make boost] $@ $*
+endif
+
+ALL_BOOST_MODULES: $(BOOST_DIR)
+	@echo [make boost]$@
+	cd $(BOOST_DIR) && git submodule update --init --recursive
+
+$(PREFIX)/lib: BOOST_MODULES
+	cd $(BOOST_DIR) && ./bootstrap.sh && ./b2 toolset=gcc link=static,shared address-model=64 install -j $(CORE_NUMBER) --prefix=$(PREFIX) $(BOOST_MODULE_OPTION)
+
+$(PREFIX)/include/boost: BOOST_MODULES
+	cd $(BOOST_DIR) && ./bootstrap.sh && ./b2 toolset=gcc link=static,shared address-model=64 install -j $(CORE_NUMBER) --prefix=$(PREFIX) $(BOOST_MODULE_OPTION)
+
+install.boost: $(PREFIX)/lib $(PREFIX)/include/boost

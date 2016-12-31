@@ -1,0 +1,1 @@
+add_subdirectory(cnoid_pybody)

@@ -94,3 +94,4 @@ endforeach()
 
 # for python module
 catkin_python_setup()
+add_subdirectory(src)

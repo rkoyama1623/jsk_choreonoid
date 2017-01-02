@@ -3,6 +3,8 @@ link_directories(${choreonoid_LIBRARY_DIRS} ${Boost_PYTHON_LIB_DIR})
 add_jsk_choreonoid_python_module(cnoid_body_sample cnoid_body_sample.cpp)
 target_link_libraries(cnoid_body_sample CnoidBody CnoidPython ${PYTHON_LIBRARIES} ${Boost_PYTHON_LIBRARIES})
 
+add_jsk_choreonoid_python_module(PyBodyMethods python/PyBodyMethods.cpp)
+target_link_libraries(PyBodyMethods CnoidBody CnoidPython ${PYTHON_LIBRARIES} ${Boost_PYTHON_LIBRARIES})
 
 add_jsk_choreonoid_python_module(cnoid_numpy_sample cnoid_numpy_sample.cpp)
 target_link_libraries(cnoid_numpy_sample

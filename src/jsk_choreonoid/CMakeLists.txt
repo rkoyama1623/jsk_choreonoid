@@ -1,1 +1,1 @@
-add_subdirectory(cnoid_pybody)
+add_subdirectory(BodyEx)

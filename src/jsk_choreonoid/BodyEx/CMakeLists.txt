@@ -11,7 +11,7 @@
 
 # set output directory for .so
 if (CATKIN_DEVEL_PREFIX)
-set(LIBS_OUTPUT_DIR ${PROJECT_SOURCE_DIR}/src/jsk_choreonoid/cnoid_pybody)
+set(LIBS_OUTPUT_DIR ${PROJECT_SOURCE_DIR}/src/jsk_choreonoid/BodyEx)
 message(LIBS_OUTPUT_DIR= ${LIBS_OUTPUT_DIR})
 else()
 set(LIBS_OUTPUT_DIR ${PROJECT_BINARY_DIR}/python2.7/dist-packages/cnoid_pybody)
